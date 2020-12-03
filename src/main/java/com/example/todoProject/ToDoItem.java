@@ -1,15 +1,15 @@
 package com.example.todoProject;
 
-public class Item {
+public class ToDoItem {
     private String name;
-    private Integer ID;
+    private Integer Id;
     private Boolean done;
     private String category;
     private String description;
     private String updatedAt;
     private String createdAt;
 
-    public Item(String name, String category, String description) {
+    public ToDoItem(String name, String category, String description) {
         this.name = name;
         this.category = category;
         this.description = description;
@@ -23,12 +23,12 @@ public class Item {
         this.name = name;
     }
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return Id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer id) {
+        this.Id = id;
     }
 
     public Boolean getDone() {
