@@ -19,6 +19,7 @@ public class ToDoItem {
         this.category = category;
         this.description = description;
         this.createdAt = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        this.updatedAt = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         this.id = createID();
     }
 
