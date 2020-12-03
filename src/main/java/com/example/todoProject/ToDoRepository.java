@@ -2,7 +2,9 @@ package com.example.todoProject;
 
 import org.springframework.stereotype.Repository;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -44,12 +46,14 @@ public class ToDoRepository {
     // edit a toDoItem
     public ToDoItem editToDoItem(ToDoItem toDoItem) {
         ToDoItem toDoItemToEdit = this.getToDoItem(toDoItem.getId());
+
         if (toDoItemToEdit != null) {
             toDoItemToEdit.setName(toDoItem.getName());
             toDoItemToEdit.setCategory(toDoItem.getCategory());
             toDoItemToEdit.setDescription(toDoItem.getDescription());
+            toDoItemToEdit.setUpdatedAt();
         }
-        return toDoItem;
+        return toDoItemToEdit;
     }
 
     // delete a toDoItem

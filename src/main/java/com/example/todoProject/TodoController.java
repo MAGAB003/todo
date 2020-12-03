@@ -12,23 +12,24 @@ public class TodoController {
     @Autowired
     ToDoRepository repository;
 
-    @GetMapping("/todo")
+    @GetMapping("/todos")
     public List<ToDoItem> getToDoItems() {
         return repository.getToDoItems();
     }
 
-    @GetMapping("/todo/{id}")
+    @GetMapping("/todos/{id}")
     public ToDoItem getToDoItem(@PathVariable Integer id) {
         return repository.getToDoItem(id);
     }
 
-    @PostMapping("/todo")
+    @PostMapping("/todos")
     public ToDoItem addToDoItem(@RequestBody ToDoItem toDoItem) {
         return repository.addToDoItem(toDoItem);
     }
 
-    @PutMapping("/todo/{id}")
+    @PutMapping("/todos/{id}")
     public ToDoItem editToDoItem(@PathVariable Integer id, @RequestBody ToDoItem toDoItem) {
+        toDoItem.setId(id);
         return repository.editToDoItem(toDoItem);
     }
 
