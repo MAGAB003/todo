@@ -49,6 +49,7 @@ public class ToDoRepository {
 
         if (toDoItemToEdit != null) {
             toDoItemToEdit.setName(toDoItem.getName());
+            toDoItemToEdit.setDone(toDoItem.getDone());
             toDoItemToEdit.setCategory(toDoItem.getCategory());
             toDoItemToEdit.setDescription(toDoItem.getDescription());
             toDoItemToEdit.setUpdatedAt();
