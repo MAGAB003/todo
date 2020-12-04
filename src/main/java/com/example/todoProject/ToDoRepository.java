@@ -35,8 +35,6 @@ public class ToDoRepository {
 
     // Add a ToDoItem
     public ToDoItem addToDoItem(ToDoItem toDoItem) {
-        ToDoItem lastToDoItem = toDoItems.get(toDoItems.size()-1);
-        toDoItem.setId(lastToDoItem.getId()+1); // set an id on the new toDoItem, should be unique, will be done by the database in future exercises
         toDoItems.add(toDoItem);
         return toDoItem;
     }

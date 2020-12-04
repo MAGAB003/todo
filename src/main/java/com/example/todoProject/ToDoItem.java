@@ -25,7 +25,7 @@ public class ToDoItem {
     private static AtomicInteger idCounter = new AtomicInteger();
 
     public static Integer createID() {
-        return Integer.valueOf(idCounter.getAndIncrement());
+        return Integer.valueOf(idCounter.incrementAndGet());
     }
 
     public String getName() {
