@@ -2,9 +2,7 @@ package com.example.todoProject;
 
 import org.springframework.stereotype.Repository;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -20,7 +18,12 @@ public class ToDoRepository {
         toDoItems.add(new ToDoItem("Buy milk", "Shopping", "Buy a lot of milk"));
     }
 
-    // get one toDoItem
+    // Get all ToDoItems
+    public List<ToDoItem> getToDoItems() {
+        return toDoItems;
+    }
+
+    // Get one ToDoItem
     public ToDoItem getToDoItem(Integer id) {
         for (ToDoItem toDoItem : toDoItems) {
             if (toDoItem.getId().equals(id)) {
@@ -30,12 +33,7 @@ public class ToDoRepository {
         return null;
     }
 
-    // get all toDoItems
-    public List<ToDoItem> getToDoItems() {
-        return toDoItems;
-    }
-
-    // add a toDoItem
+    // Add a ToDoItem
     public ToDoItem addToDoItem(ToDoItem toDoItem) {
         ToDoItem lastToDoItem = toDoItems.get(toDoItems.size()-1);
         toDoItem.setId(lastToDoItem.getId()+1); // set an id on the new toDoItem, should be unique, will be done by the database in future exercises
@@ -43,10 +41,9 @@ public class ToDoRepository {
         return toDoItem;
     }
 
-    // edit a toDoItem
+    // Edit a ToDoItem
     public ToDoItem editToDoItem(ToDoItem toDoItem) {
         ToDoItem toDoItemToEdit = this.getToDoItem(toDoItem.getId());
-
         if (toDoItemToEdit != null) {
             toDoItemToEdit.setName(toDoItem.getName());
             toDoItemToEdit.setDone(toDoItem.getDone());
@@ -57,7 +54,7 @@ public class ToDoRepository {
         return toDoItemToEdit;
     }
 
-    // delete a toDoItem
+    // Delete a ToDoItem
     public void deleteToDoItem(Integer id) {
         ToDoItem toDoItemToDelete = this.getToDoItem(id);
         if (toDoItemToDelete != null) {
