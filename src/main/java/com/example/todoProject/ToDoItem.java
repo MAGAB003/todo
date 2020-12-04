@@ -1,10 +1,10 @@
 package com.example.todoProject;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.Instant;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ToDoItem {
+
     private String name;
     private Integer id;
     private Boolean done;
@@ -15,12 +15,17 @@ public class ToDoItem {
 
     public ToDoItem(String name, String category, String description) {
         this.name = name;
+        this.id = createID();
         this.done = false;
         this.category = category;
         this.description = description;
-        this.createdAt = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        this.updatedAt = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        this.id = createID();
+        this.updatedAt = this.createdAt = Instant.now().toString();
+    }
+
+    private static AtomicInteger idCounter = new AtomicInteger();
+
+    public static Integer createID() {
+        return Integer.valueOf(idCounter.getAndIncrement());
     }
 
     public String getName() {
@@ -37,13 +42,6 @@ public class ToDoItem {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    private static AtomicInteger idCounter = new AtomicInteger();
-
-    public static Integer createID()
-    {
-        return Integer.valueOf(idCounter.getAndIncrement());
     }
 
     public Boolean getDone() {
@@ -75,7 +73,7 @@ public class ToDoItem {
     }
 
     public void setUpdatedAt() {
-        this.updatedAt = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        this.updatedAt =  Instant.now().toString();
     }
 
     public String getCreatedAt() {
@@ -85,7 +83,5 @@ public class ToDoItem {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
-
-
 
 }
