@@ -38,7 +38,7 @@ public class TodoProjectApplicationTests {
 		)
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.content().string(containsString("Clean up")))
-				.andExpect(MockMvcResultMatchers.content().string(containsString("Finish ToDo app")));
+				.andExpect(MockMvcResultMatchers.content().string(containsString("Finish web app")));
 	}
 
 	@Test
@@ -81,14 +81,14 @@ public class TodoProjectApplicationTests {
 
 
 
-/*
+
 	@Test
 	public void testEditToDoItem() throws Exception {
 		mvc.perform(
 				MockMvcRequestBuilders.get("/todos/2")
 		)
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.content().string(containsString("Finish ToDo app")))
+				.andExpect(MockMvcResultMatchers.content().string(containsString("Finish web app")))
 				.andExpect(MockMvcResultMatchers.content().string(containsString("\"done\":false")));
 
 		ToDoItem toDoItem = new ToDoItem("Finish ToDo app", "Development", "Finish Todo App REST API");
@@ -121,7 +121,7 @@ public class TodoProjectApplicationTests {
 		)
 				.andExpect(status().isNotFound());
 	}
-*/
+
 	@Test
 	public void testDeleteToDoItem() throws Exception {
 		mvc.perform(
@@ -141,8 +141,7 @@ public class TodoProjectApplicationTests {
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.content().string(not(containsString("Buy milk"))));
 	}
-
-
+/*
 	@Test
 	public void testDeleteNotExistingToDoItem() throws Exception {
 		mvc.perform(
@@ -151,5 +150,5 @@ public class TodoProjectApplicationTests {
 				.andExpect(status().isNotFound());
 	}
 
-
+ */
 }
