@@ -1,6 +1,8 @@
 package com.example.todoProject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +24,8 @@ public class TodoController {
     }
 
     @PostMapping("/todos")
-    public ToDoItem addToDoItem(@RequestBody ToDoItem toDoItem) {
-        return repository.addToDoItem(toDoItem);
+    public ResponseEntity<ToDoItem> addToDoItem(@RequestBody ToDoItem toDoItem) {
+        return new ResponseEntity<>(repository.addToDoItem(toDoItem), HttpStatus.CREATED);
     }
 
     @PutMapping("/todos/{id}")

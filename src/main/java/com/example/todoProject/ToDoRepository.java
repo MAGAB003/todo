@@ -17,7 +17,6 @@ public class ToDoRepository {
         toDoItems.add(new ToDoItem("Cook dinner", "Household", "Cook dinner for the family"));
         toDoItems.add(new ToDoItem("Buy milk", "Shopping", "Buy a lot of milk"));
         toDoItems.add(new ToDoItem("Buy dishwashing tablet", "Shopping", "we need this!"));
-        toDoItems.add(new ToDoItem("clean the bathroom", "Household", "we need this!"));
     }
 
     // Get all ToDoItems
