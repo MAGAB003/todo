@@ -1,12 +1,15 @@
 package com.example.todoProject;
 
+import org.springframework.data.annotation.Id;
+
 import java.time.Instant;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ToDoItem {
 
     private String name;
-    private Integer id;
+    @Id
+    private String id;
     private Boolean done;
     private String category;
     private String description;
@@ -15,7 +18,6 @@ public class ToDoItem {
 
     public ToDoItem(String name, String category, String description) {
         this.name = name;
-        this.id = createID();
         this.done = false;
         this.category = category;
         this.description = description;
@@ -25,7 +27,7 @@ public class ToDoItem {
     private static AtomicInteger idCounter = new AtomicInteger();
 
     public static Integer createID() {
-        return Integer.valueOf(idCounter.incrementAndGet());
+        return idCounter.incrementAndGet();
     }
 
     public String getName() {
@@ -36,11 +38,11 @@ public class ToDoItem {
         this.name = name;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

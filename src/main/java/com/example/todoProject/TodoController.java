@@ -19,8 +19,8 @@ public class TodoController {
     }
 
     @GetMapping("/todos/{id}")
-    public ToDoItem getToDoItem(@PathVariable Integer id) {
-        return repository.getToDoItem(id);
+    public ToDoItem getToDoItem(@PathVariable String id) {
+        return repository.getToDoItem(id).get();
     }
 
     @PostMapping("/todos")
@@ -29,14 +29,23 @@ public class TodoController {
     }
 
     @PutMapping("/todos/{id}")
-    public ToDoItem editToDoItem(@PathVariable Integer id, @RequestBody ToDoItem toDoItem) {
+    public ResponseEntity<ToDoItem> editToDoItem(@PathVariable String id, @RequestBody ToDoItem toDoItem) {
         toDoItem.setId(id);
-        return repository.editToDoItem(toDoItem);
+        try {
+            return new ResponseEntity<>(repository.editToDoItem(id, toDoItem), HttpStatus.OK);
+        } catch (InvalidToDoItemIdException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/todos/{id}")
-    public void deleteToDoItem(@PathVariable Integer id) {
-        repository.deleteToDoItem(id);
+    public ResponseEntity<ToDoItem> deleteToDoItem(@PathVariable String id) {
+        try {
+            repository.deleteToDoItem(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (InvalidToDoItemIdException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

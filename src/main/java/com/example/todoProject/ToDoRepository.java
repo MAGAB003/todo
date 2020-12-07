@@ -1,63 +1,63 @@
 package com.example.todoProject;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ToDoRepository {
 
-    private List<ToDoItem> toDoItems;
+    TodoMongoRepository tmr;
 
-    public ToDoRepository() {
-        toDoItems = new ArrayList<>();
-        toDoItems.add(new ToDoItem("Clean up", "Household", "Clean up your mess"));
-        toDoItems.add(new ToDoItem("Finish web app", "Development", "Finish project"));
-        toDoItems.add(new ToDoItem("Cook dinner", "Household", "Cook dinner for the family"));
-        toDoItems.add(new ToDoItem("Buy milk", "Shopping", "Buy a lot of milk"));
-        toDoItems.add(new ToDoItem("Buy dishwashing tablet", "Shopping", "we need this!"));
+    ToDoRepository(TodoMongoRepository tmr) {
+        this.tmr = tmr;
     }
 
     // Get all ToDoItems
     public List<ToDoItem> getToDoItems() {
-        return toDoItems;
+        return tmr.findAll();
     }
 
     // Get one ToDoItem
-    public ToDoItem getToDoItem(Integer id) {
-        for (ToDoItem toDoItem : toDoItems) {
-            if (toDoItem.getId().equals(id)) {
-                return toDoItem;
-            }
-        }
-        return null;
+    public Optional<ToDoItem> getToDoItem(String id) {
+        return tmr.findById(id);
     }
 
     // Add a ToDoItem
     public ToDoItem addToDoItem(ToDoItem toDoItem) {
-        toDoItems.add(toDoItem);
+        tmr.insert(toDoItem);
         return toDoItem;
     }
 
     // Edit a ToDoItem
-    public ToDoItem editToDoItem(ToDoItem toDoItem) {
-        ToDoItem toDoItemToEdit = this.getToDoItem(toDoItem.getId());
-        if (toDoItemToEdit != null) {
-            toDoItemToEdit.setName(toDoItem.getName());
-            toDoItemToEdit.setDone(toDoItem.getDone());
-            toDoItemToEdit.setCategory(toDoItem.getCategory());
-            toDoItemToEdit.setDescription(toDoItem.getDescription());
-            toDoItemToEdit.setUpdatedAt();
+    public ToDoItem editToDoItem(String id, ToDoItem toDoItem) throws InvalidToDoItemIdException {
+        Optional<ToDoItem> response = tmr.findById(id);
+        if (!response.isPresent()) {
+            throw new InvalidToDoItemIdException();
         }
+
+        ToDoItem toDoItemToEdit = response.get();
+        if (toDoItem.getName() != null) toDoItemToEdit.setName(toDoItem.getName());
+        if (toDoItem.getCategory() != null) toDoItemToEdit.setCategory(toDoItem.getCategory());
+        if (toDoItem.getDescription() != null) toDoItemToEdit.setDescription(toDoItem.getDescription());
+        if (toDoItem.getDone() != null) toDoItemToEdit.setDone(toDoItem.getDone());
+        toDoItemToEdit.setUpdatedAt();
+        tmr.save(toDoItemToEdit);
         return toDoItemToEdit;
     }
 
     // Delete a ToDoItem
-    public void deleteToDoItem(Integer id) {
-        ToDoItem toDoItemToDelete = this.getToDoItem(id);
-        if (toDoItemToDelete != null) {
-            toDoItems.remove(toDoItemToDelete);
+    public void deleteToDoItem(String id) throws InvalidToDoItemIdException {
+        Optional<ToDoItem> response = tmr.findById(id);
+        if (!response.isPresent()) {
+            throw new InvalidToDoItemIdException();
         }
+        tmr.deleteById(id);
     }
+
+}
+
+interface TodoMongoRepository extends MongoRepository<ToDoItem, String> {
 }
