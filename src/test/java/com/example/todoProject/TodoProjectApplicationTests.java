@@ -74,14 +74,6 @@ public class TodoProjectApplicationTests {
 				.andExpect(MockMvcResultMatchers.content().string(containsString("New ToDo")));
 	}
 
-
-
-
-
-
-
-
-
 	@Test
 	public void testEditToDoItem() throws Exception {
 		mvc.perform(
@@ -141,7 +133,7 @@ public class TodoProjectApplicationTests {
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.content().string(not(containsString("Buy milk"))));
 	}
-/*
+
 	@Test
 	public void testDeleteNotExistingToDoItem() throws Exception {
 		mvc.perform(
@@ -150,5 +142,4 @@ public class TodoProjectApplicationTests {
 				.andExpect(status().isNotFound());
 	}
 
- */
 }
