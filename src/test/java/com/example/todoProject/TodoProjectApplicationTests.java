@@ -121,7 +121,7 @@ public class TodoProjectApplicationTests {
 		)
 				.andExpect(status().isNotFound());
 	}
-
+*/
 	@Test
 	public void testDeleteToDoItem() throws Exception {
 		mvc.perform(
@@ -151,5 +151,5 @@ public class TodoProjectApplicationTests {
 				.andExpect(status().isNotFound());
 	}
 
- */
+
 }
